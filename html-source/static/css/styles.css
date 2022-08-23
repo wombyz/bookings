@@ -1,0 +1,27 @@
+.my-footer {
+    background-color: #3a3a3a;
+    margin-top: 1.5em;
+    height: 5em;
+    padding: 1em;
+    color: white;
+  }
+
+  .room-image {
+    max-width: 50%;
+  }
+
+  .redText {
+    color: red;
+  }
+
+  .notie-container {
+    box-shadow: none;
+  }
+
+  .date-picker {
+    z-index: 100000;
+  }
+
+  .swal2-actions {
+    z-index: 5000;
+  }
