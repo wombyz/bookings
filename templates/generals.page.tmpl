@@ -1,0 +1,93 @@
+{{template "base" .}}
+
+{{define "content"}}
+
+<div class="container">
+
+    <div class="row">
+      <div class="col">
+        <img src="/static/images/generals-quarters.png" class="img-fluid img-thumbnail mx-auto d-block room-image">
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center mt-4">General's Quarters</h1>	
+                <p>
+                    Your home away from home. A place where memories are made.
+                    Your home away from home. A place where memories are made.
+                    Your home away from home. A place where memories are made.
+                    Your home away from home. A place where memories are made.
+                </p>
+            </div>	
+        </div>
+
+        <div class="row">
+            <div class="col text-center">
+              <a id="check-availability-btn" href="#!" class="btn btn-success">Check Availability</a>
+            </div>
+        </div>
+</div>
+
+{{end}}
+
+{{define "js"}}
+    <script>
+              document.getElementById("check-availability-btn").addEventListener("click", function() {
+        let html =`
+        <form id="check-availablity-form" action="" method="post" novalidate class="needs-validation">
+          <div class="row">
+            <div class="col">
+              <div class="row" id="reservation-dates-modal">
+                <div class="col">
+                  <input required class="form-control" type="text" name="start" id="start" placeholder="Arrival">
+                </div>
+                <div class="col">
+                  <input required class="form-control" type="text" name="end" id="end" placeholder="Departure">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        `
+        
+        // Create sweet alert using the above HTML
+        // Callback will capture the result
+        // If there is a result captured proceed with following code
+
+        attention.custom({
+          msg: html,
+          title: "Choose your dates:",
+          didOpen: () => {
+              const elem = document.getElementById("reservation-dates-modal");
+              const rp = new DateRangePicker(elem, {
+                  format: 'yyyy-mm-dd',
+                  showOnFocus: true,
+              })
+          },
+          callback: function(result) {
+            console.log("called")
+
+            // Get form
+            let form = document.getElementById("check-availablity-form");
+            // Store form result
+            let formData = new FormData(form);
+            formData.append("csrf_token", "{{.CSRFToken}}");
+
+            fetch("/search-availability-json", {
+              method: "post",
+              body: formData,
+            })
+              .then(response => response.json())
+              .then(data => {
+                console.log(data);
+                console.log(data.ok);
+                console.log(data.message);
+            })
+          }
+        })
+      })
+    </script>
+
+
+{{end}}
