@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/wombyz/bookings/internal/models"
 	"html/template"
 	"log"
 
@@ -15,4 +16,5 @@ type AppConfig struct {
 	InProduction  bool
 	TemplateCache map[string]*template.Template
 	Session       *scs.SessionManager
+	MailChan      chan models.MailData
 }

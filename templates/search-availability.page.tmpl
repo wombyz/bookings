@@ -18,11 +18,11 @@
               <div class="row" id="reservation-dates">
           
                 <div class="col">
-                  <input type="text" required class="form-control" name="start_date" placeholder="Arrival date">
+                  <input type="text" required class="form-control" name="sd" placeholder="Arrival">
                 </div>
           
                 <div class="col">
-                  <input type="text" required class="form-control" name="end_date" placeholder="Departure date">
+                  <input type="text" required class="form-control" name="ed" placeholder="Departure">
                 </div>
           
               </div>
@@ -48,9 +48,9 @@
   <script>
     const elem = document.getElementById('reservation-dates');
     const rangepicker = new DateRangePicker(elem, {
-        format: "yyyy-mm-dd",
-        minDate: new Date(),
-    }); 
+      format: "yyyy-mm-dd",
+      minDate: new Date(),
+    });
   </script>
 
 {{end}}
